@@ -2,7 +2,29 @@ import Image from "next/image";
 import ContactForm from "./_components/contact-form";
 
 const BRAND_NAME = "MAMAKQUANT";
-const LOGO_SRC = "/mamakquantlogo.png";
+const LOGO_SRC = "/mamakquant-logo.png";
+const SITE_URL = "https://mamakquant.com";
+const SEO_DESCRIPTION =
+  "MAMAKQUANT builds vertically integrated quant infrastructure across blockchain nodes, on-chain intelligence, research engines, backtesting systems, and automated execution.";
+
+const socialLinks = [
+  { label: "Instagram", href: "https://www.instagram.com/mamakquant/" },
+  { label: "X", href: "https://x.com/mamakquant" },
+  { label: "YouTube", href: "https://www.youtube.com/@mamakquant" },
+];
+
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: BRAND_NAME,
+  url: SITE_URL,
+  sameAs: socialLinks.map((link) => link.href),
+  parentOrganization: {
+    "@type": "Organization",
+    name: "EVERSTONE AEONBRIDGE GROUP HOLDINGS Ltd",
+  },
+  description: SEO_DESCRIPTION,
+};
 
 const navItems = [
   { label: "Home", href: "#home" },
@@ -150,6 +172,12 @@ const principles = [
 export default function Home() {
   return (
     <main id="home" className="min-h-screen max-w-full overflow-hidden bg-[#02040a] text-slate-100">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(organizationJsonLd).replace(/</g, "\\u003c"),
+        }}
+      />
       <Navbar />
       <HeroSection />
       <PositioningSection />
@@ -222,9 +250,8 @@ function HeroSection() {
             VERTICALLY INTEGRATED QUANT INFRASTRUCTURE
           </h1>
           <p className="mt-7 max-w-[calc(100vw_-_2.5rem)] text-lg leading-8 text-slate-300 sm:max-w-2xl sm:text-xl">
-            MAMAKQUANT builds proprietary market intelligence infrastructure across
-            blockchain nodes, on-chain entity graphs, quantitative research engines,
-            backtesting systems, and automated trading execution.
+            From blockchain nodes to market intelligence, research engines, and
+            automated execution.
           </p>
 
           <div className="mt-9 flex w-full max-w-[calc(100vw_-_2.5rem)] flex-col gap-3 sm:w-auto sm:max-w-none sm:flex-row">
@@ -565,13 +592,31 @@ function SiteFooter() {
             <p className="mt-4 text-sm tracking-[0.14em] text-slate-400">
               QUANT INFRASTRUCTURE FOR MARKET INTELLIGENCE
             </p>
+            <p className="mt-3 text-sm text-slate-500">
+              Held by EVERSTONE AEONBRIDGE GROUP HOLDINGS Ltd.
+            </p>
           </div>
-          <div className="flex flex-wrap gap-4">
-            {footerLinks.map((link) => (
-              <a key={link.href} href={link.href} className="text-sm text-slate-300 transition hover:text-white">
-                {link.label}
-              </a>
-            ))}
+          <div className="flex flex-col gap-5 md:items-end">
+            <div className="flex flex-wrap gap-4">
+              {footerLinks.map((link) => (
+                <a key={link.href} href={link.href} className="text-sm text-slate-300 transition hover:text-white">
+                  {link.label}
+                </a>
+              ))}
+            </div>
+            <div className="flex flex-wrap gap-4">
+              {socialLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-slate-400 transition hover:text-yellow-100"
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
         <p className="mt-8 max-w-4xl border-t border-white/10 pt-6 text-xs leading-6 text-slate-500">

@@ -20,13 +20,13 @@ npm run build
 
 ## Deployment
 
-The project is static-first and ready for deployment on Vercel under `mamakquant.com`.
+The project is static-first and ready for deployment under `mamakquant.com`.
 
 ## Brand Assets
 
-The official logo is stored at `public/mamakquantlogo.png`. App Router icons are generated from the same logo:
+The official logo is stored at `public/mamakquant-logo.png`. Browser and social icons are generated from the same logo:
 
-- `src/app/favicon.ico`
-- `src/app/icon.png`
-- `src/app/apple-icon.png`
-- `src/app/opengraph-image.png`
+- `public/favicon.ico`
+- `public/icon.png`
+- `public/apple-icon.png`
+- `public/og-image.png`

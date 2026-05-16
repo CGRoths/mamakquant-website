@@ -1,11 +1,18 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
+const siteUrl = "https://mamakquant.com";
+const seoTitle = "MAMAKQUANT | Vertically Integrated Quant Infrastructure";
+const seoDescription =
+  "MAMAKQUANT builds vertically integrated quant infrastructure across blockchain nodes, on-chain intelligence, research engines, backtesting systems, and automated execution.";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://mamakquant.com"),
-  title: "MAMAKQUANT | Institutional Quant Infrastructure",
-  description:
-    "MAMAKQUANT builds proprietary crypto market intelligence infrastructure across node data, entity-aware on-chain intelligence, quantitative research, backtesting, strategy deployment, and execution.",
+  metadataBase: new URL(siteUrl),
+  title: seoTitle,
+  description: seoDescription,
+  alternates: {
+    canonical: siteUrl,
+  },
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
@@ -14,27 +21,25 @@ export const metadata: Metadata = {
     apple: [{ url: "/apple-icon.png", type: "image/png" }],
   },
   openGraph: {
-    title: "MAMAKQUANT | Institutional Quant Infrastructure",
-    description:
-      "Institutional Quant infrastructure for market intelligence, research, backtesting, and automated execution.",
-    url: "https://mamakquant.com",
+    title: seoTitle,
+    description: seoDescription,
+    url: siteUrl,
     siteName: "MAMAKQUANT",
     images: [
       {
-        url: "/opengraph-image.png",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "MAMAKQUANT",
+        alt: seoTitle,
       },
     ],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "MAMAKQUANT",
-    description:
-      "Institutional Web3 infrastructure for market intelligence, research, backtesting, and automated execution.",
-    images: ["/opengraph-image.png"],
+    title: seoTitle,
+    description: seoDescription,
+    images: ["/og-image.png"],
   },
 };
 
