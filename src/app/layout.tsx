@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://mamakquant.com"),
-  title: "MAMAKQUANT",
+  title: "MAMAKQUANT | Institutional Quant Infrastructure",
   description:
     "MAMAKQUANT builds proprietary crypto market intelligence infrastructure across node data, entity-aware on-chain intelligence, quantitative research, backtesting, strategy deployment, and execution.",
   icons: {
@@ -14,9 +14,9 @@ export const metadata: Metadata = {
     apple: [{ url: "/apple-icon.png", type: "image/png" }],
   },
   openGraph: {
-    title: "MAMAKQUANT",
+    title: "MAMAKQUANT | Institutional Quant Infrastructure",
     description:
-      "Institutional Web3 infrastructure for market intelligence, research, backtesting, and automated execution.",
+      "Institutional Quant infrastructure for market intelligence, research, backtesting, and automated execution.",
     url: "https://mamakquant.com",
     siteName: "MAMAKQUANT",
     images: [
