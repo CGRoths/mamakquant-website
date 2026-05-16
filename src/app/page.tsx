@@ -651,10 +651,11 @@ function BrandLogo({ size }: { size: "sm" | "md" | "lg" }) {
     md: "h-14 w-14",
     lg: "h-20 w-20",
   }[size];
+  const radius = size === "sm" ? "rounded-xl" : "rounded-2xl";
 
   return (
     <span
-      className={`${dimensions} relative shrink-0 overflow-hidden rounded-lg border border-yellow-300/30 bg-black shadow-[0_0_32px_rgba(250,204,21,0.18)]`}
+      className={`${dimensions} ${radius} relative shrink-0 overflow-hidden border border-yellow-300/30 bg-black shadow-[0_0_32px_rgba(250,204,21,0.18)]`}
       aria-hidden="true"
     >
       <Image
