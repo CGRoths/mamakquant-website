@@ -1,4 +1,8 @@
+import Image from "next/image";
 import ContactForm from "./_components/contact-form";
+
+const BRAND_NAME = "MAMAKQUANT";
+const LOGO_SRC = "/mamakquantlogo.png";
 
 const navItems = [
   { label: "Home", href: "#home" },
@@ -124,12 +128,12 @@ const roadmapCurrent = [
   "MQNODE",
   "MQENGINE / MQBTDASH",
   "MQBOT",
-  "MQ ChainActivity",
+  "MQ CHAINACTIVITY",
 ];
 
 const roadmapFuture = [
-  "MamakQuantBrain",
-  "MamakQuant API",
+  "MAMAKQUANTBRAIN",
+  "MAMAKQUANT API",
   "Institutional dashboard",
   "Multi-chain intelligence expansion",
   "Strategy marketplace / strategy registry",
@@ -168,10 +172,10 @@ function Navbar() {
         className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-6 lg:px-8"
       >
         <a href="#home" className="group flex items-center gap-3">
-          <span className="grid h-9 w-9 place-items-center rounded-lg border border-cyan-300/40 bg-cyan-300/10 text-sm font-semibold text-cyan-100 shadow-[0_0_28px_rgba(34,211,238,0.22)]">
-            MQ
+          <BrandLogo size="sm" />
+          <span className="text-sm font-semibold tracking-[0.16em] text-white sm:text-base">
+            {BRAND_NAME}
           </span>
-          <span className="text-sm font-semibold text-white sm:text-base">MamakQuant</span>
         </a>
 
         <div className="hidden items-center gap-6 md:flex">
@@ -190,7 +194,7 @@ function Navbar() {
           href="#contact"
           className="hidden rounded-lg border border-cyan-300/40 bg-cyan-300/10 px-4 py-2 text-sm font-medium text-cyan-50 transition hover:border-cyan-200 hover:bg-cyan-300/20 sm:inline-flex"
         >
-          Contact MamakQuant
+          Contact MAMAKQUANT
         </a>
       </nav>
     </header>
@@ -202,20 +206,23 @@ function HeroSection() {
     <section className="relative min-h-[min(880px,88svh)] overflow-hidden pt-24 sm:pt-28">
       <div className="quant-grid absolute inset-0 opacity-50" />
       <div className="hero-depth absolute inset-0" />
-      <div className="absolute right-5 top-24 hidden h-[560px] w-[620px] xl:right-8 lg:block">
+      <div className="absolute right-5 top-24 hidden h-[560px] w-[560px] xl:right-8 2xl:w-[620px] lg:block">
         <InfrastructureDiagram />
       </div>
 
       <div className="relative z-10 mx-auto flex max-w-7xl flex-col px-5 pb-16 sm:px-6 lg:px-8">
         <div className="w-full max-w-[calc(100vw_-_2.5rem)] pt-10 sm:max-w-3xl sm:pt-16 lg:pt-24">
-          <p className="mb-5 inline-flex rounded-lg border border-cyan-300/30 bg-cyan-300/10 px-3 py-1 text-sm font-medium text-cyan-100">
-            MamakQuant
-          </p>
+          <div className="mb-5 flex items-center gap-4">
+            <BrandLogo size="lg" />
+            <p className="inline-flex rounded-lg border border-yellow-300/35 bg-yellow-300/10 px-3 py-1 text-sm font-semibold tracking-[0.16em] text-yellow-100">
+              {BRAND_NAME}
+            </p>
+          </div>
           <h1 className="max-w-[calc(100vw_-_2.5rem)] text-4xl font-semibold leading-[1.08] text-white sm:max-w-4xl sm:text-6xl lg:text-7xl">
-            Vertically Integrated Quant Infrastructure
+            VERTICALLY INTEGRATED QUANT INFRASTRUCTURE
           </h1>
           <p className="mt-7 max-w-[calc(100vw_-_2.5rem)] text-lg leading-8 text-slate-300 sm:max-w-2xl sm:text-xl">
-            MamakQuant builds proprietary market intelligence infrastructure across
+            MAMAKQUANT builds proprietary market intelligence infrastructure across
             blockchain nodes, on-chain entity graphs, quantitative research engines,
             backtesting systems, and automated trading execution.
           </p>
@@ -341,8 +348,8 @@ function PositioningSection() {
       <Container>
         <SectionHeader
           eyebrow="Company positioning"
-          title="From raw market data to strategy-ready intelligence"
-          body="MamakQuant is designed to own the full data and strategy pipeline instead of depending only on third-party vendors. The goal is to transform blockchain, exchange, and market data into clean, point-in-time-correct, research-ready, and execution-ready signals."
+          title="FROM RAW MARKET DATA TO STRATEGY-READY INTELLIGENCE"
+          body="MAMAKQUANT is designed to own the full data and strategy pipeline instead of depending only on third-party vendors. The goal is to transform blockchain, exchange, and market data into clean, point-in-time-correct, research-ready, and execution-ready signals."
         />
         <div className="mt-10 grid gap-4 md:grid-cols-3">
           {positioningCards.map((card) => (
@@ -360,7 +367,7 @@ function StackSection() {
       <Container>
         <SectionHeader
           eyebrow="Core systems"
-          title="The MamakQuant Stack"
+          title="THE MAMAKQUANT STACK"
           body="A vertically integrated stack for market intelligence, quantitative research, validation, and execution."
         />
         <div className="mt-12 grid gap-5 lg:grid-cols-3">
@@ -388,9 +395,9 @@ function ChainActivitySection() {
       <Container className="relative z-10">
         <SectionHeader
           eyebrow="MQ ChainActivity"
-          title="MQ ChainActivity"
+          title="MQ CHAINACTIVITY"
           subtitle="Entity-aware on-chain market intelligence"
-          body="MQ ChainActivity is designed to convert raw blockchain transactions into entity-aware, sector-aware, and strategy-ready intelligence."
+          body="MQ CHAINACTIVITY is designed to convert raw blockchain transactions into entity-aware, sector-aware, and strategy-ready intelligence."
         />
 
         <div className="mt-12 overflow-hidden rounded-lg border border-white/10 bg-white/[0.045] p-4 backdrop-blur">
@@ -430,8 +437,8 @@ function InfrastructureEdgeSection() {
       <Container>
         <SectionHeader
           eyebrow="Infrastructure edge"
-          title="Built for data control, speed, and research depth"
-          body="MamakQuant is designed around ownership of data sources, modular infrastructure, and a clean path from raw data to deployment-ready intelligence."
+          title="BUILT FOR DATA CONTROL, SPEED, AND RESEARCH DEPTH"
+          body="MAMAKQUANT is designed around ownership of data sources, modular infrastructure, and a clean path from raw data to deployment-ready intelligence."
         />
         <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           {edgeCards.map((card) => (
@@ -456,7 +463,7 @@ function RoadmapSection() {
       <Container>
         <SectionHeader
           eyebrow="Roadmap"
-          title="Roadmap"
+          title="ROADMAP"
           body="The current build focuses on the core quant infrastructure stack, with future modules expanding research automation, API distribution, and institutional surfaces."
         />
 
@@ -472,12 +479,12 @@ function RoadmapSection() {
               ))}
             </div>
             <div className="mt-5 rounded-lg border border-cyan-300/25 bg-cyan-300/10 p-5">
-              <p className="text-sm font-semibold text-cyan-100">MamakQuantBrain</p>
+              <p className="text-sm font-semibold text-yellow-100">MAMAKQUANTBRAIN</p>
               <h4 className="mt-2 text-xl font-semibold text-white">
                 Automated factor discovery and research intelligence
               </h4>
               <p className="mt-3 text-sm leading-6 text-slate-300">
-                MamakQuantBrain is planned as an automated research layer for
+                MAMAKQUANTBRAIN is planned as an automated research layer for
                 discovering, ranking, validating, and monitoring quantitative factors
                 across crypto and multi-asset markets.
               </p>
@@ -495,8 +502,8 @@ function ResearchSection() {
       <Container>
         <SectionHeader
           eyebrow="Research philosophy"
-          title="Research-first. Infrastructure-owned. Execution-aware."
-          body="MamakQuant is not only a trading bot. It is a full-stack quantitative infrastructure project where data quality, point-in-time correctness, strategy validation, risk control, and execution feedback are part of the same system."
+          title="RESEARCH-FIRST. INFRASTRUCTURE-OWNED. EXECUTION-AWARE."
+          body="MAMAKQUANT is not only a trading bot. It is a full-stack quantitative infrastructure project where data quality, point-in-time correctness, strategy validation, risk control, and execution feedback are part of the same system."
         />
 
         <div className="mt-12 grid gap-4 md:grid-cols-4">
@@ -523,7 +530,7 @@ function ContactSection() {
               Contact
             </p>
             <h2 className="text-4xl font-semibold leading-tight text-white sm:text-5xl">
-              Contact MamakQuant
+              CONTACT MAMAKQUANT
             </h2>
             <p className="mt-6 max-w-xl text-base leading-8 text-slate-300">
               For partnerships, exchange relationships, data infrastructure discussions,
@@ -551,8 +558,13 @@ function SiteFooter() {
       <Container>
         <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
           <div>
-            <h2 className="text-lg font-semibold text-white">MamakQuant</h2>
-            <p className="mt-2 text-sm text-slate-400">Quant Infrastructure for Market Intelligence</p>
+            <div className="flex items-center gap-4">
+              <BrandLogo size="md" />
+              <h2 className="text-lg font-semibold tracking-[0.16em] text-white">MAMAKQUANT</h2>
+            </div>
+            <p className="mt-4 text-sm tracking-[0.14em] text-slate-400">
+              QUANT INFRASTRUCTURE FOR MARKET INTELLIGENCE
+            </p>
           </div>
           <div className="flex flex-wrap gap-4">
             {footerLinks.map((link) => (
@@ -630,6 +642,30 @@ function ProductCard({
         ))}
       </ul>
     </article>
+  );
+}
+
+function BrandLogo({ size }: { size: "sm" | "md" | "lg" }) {
+  const dimensions = {
+    sm: "h-10 w-10",
+    md: "h-14 w-14",
+    lg: "h-20 w-20",
+  }[size];
+
+  return (
+    <span
+      className={`${dimensions} relative shrink-0 overflow-hidden rounded-lg border border-yellow-300/30 bg-black shadow-[0_0_32px_rgba(250,204,21,0.18)]`}
+      aria-hidden="true"
+    >
+      <Image
+        src={LOGO_SRC}
+        alt=""
+        fill
+        sizes={size === "sm" ? "40px" : size === "md" ? "56px" : "80px"}
+        className="object-cover"
+        priority={size === "sm"}
+      />
+    </span>
   );
 }
 
