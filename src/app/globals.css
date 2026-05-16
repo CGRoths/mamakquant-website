@@ -1,0 +1,135 @@
+@import "tailwindcss";
+
+:root {
+  --background: #02040a;
+  --foreground: #e5edf7;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: "Aptos", "Inter", "Segoe UI", Arial, sans-serif;
+  --font-mono: "Cascadia Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+}
+
+html {
+  background: var(--background);
+  scroll-behavior: smooth;
+}
+
+body {
+  background:
+    linear-gradient(180deg, rgba(2, 4, 10, 0.96), rgba(2, 4, 10, 1)),
+    var(--background);
+  color: var(--foreground);
+  font-family: "Aptos", "Inter", "Segoe UI", Arial, sans-serif;
+}
+
+::selection {
+  background: rgba(34, 211, 238, 0.3);
+  color: #ffffff;
+}
+
+.quant-grid {
+  background-image:
+    linear-gradient(rgba(148, 163, 184, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.diagram-grid {
+  background-image:
+    linear-gradient(rgba(34, 211, 238, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 211, 238, 0.06) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.hero-depth {
+  background:
+    radial-gradient(circle at 72% 28%, rgba(34, 211, 238, 0.18), transparent 28%),
+    radial-gradient(circle at 58% 70%, rgba(124, 58, 237, 0.14), transparent 30%),
+    linear-gradient(135deg, rgba(15, 23, 42, 0.35), transparent 48%);
+}
+
+.network-path {
+  stroke-dasharray: 9 14;
+  animation: network-dash 8s linear infinite;
+}
+
+.network-path-delay {
+  animation-delay: -3s;
+}
+
+.terminal-panel {
+  position: relative;
+  overflow: hidden;
+}
+
+.terminal-panel::before {
+  animation: scanline 5s ease-in-out infinite;
+  background: linear-gradient(180deg, transparent, rgba(34, 211, 238, 0.16), transparent);
+  content: "";
+  height: 40%;
+  inset-inline: 0;
+  position: absolute;
+  top: -45%;
+}
+
+.form-field {
+  width: 100%;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(2, 6, 23, 0.72);
+  color: #ffffff;
+  outline: none;
+  padding: 0.85rem 0.95rem;
+  transition:
+    border-color 160ms ease,
+    background 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.form-field::placeholder {
+  color: rgba(148, 163, 184, 0.72);
+}
+
+.form-field:focus {
+  border-color: rgba(34, 211, 238, 0.72);
+  box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.14);
+}
+
+.form-field option {
+  background: #020617;
+  color: #ffffff;
+}
+
+@keyframes network-dash {
+  to {
+    stroke-dashoffset: -92;
+  }
+}
+
+@keyframes scanline {
+  0%,
+  30% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(360%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
