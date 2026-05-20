@@ -5,6 +5,8 @@ export const runtime = "nodejs";
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const sourceLabel = "mamakquant.com contact form";
+const rateLimitWindowMs = 15 * 60 * 1000;
+const rateLimitMaxRequests = 5;
 
 type ContactPayload = {
   name?: unknown;
@@ -24,6 +26,14 @@ type NormalizedContact = {
 };
 
 type FieldErrors = Partial<Record<"name" | "email" | "message", string>>;
+type RateLimitEntry = {
+  count: number;
+  resetAt: number;
+};
+
+const globalRateLimit = globalThis as typeof globalThis & {
+  mamakquantContactRateLimit?: Map<string, RateLimitEntry>;
+};
 
 function clean(value: unknown) {
   return typeof value === "string" ? value.trim() : "";
@@ -89,6 +99,67 @@ function buildEmailText(values: NormalizedContact, submittedAt: string) {
   ].join("\n");
 }
 
+function buildAutoReplyHtml(name: string) {
+  return `
+    <div style="font-family:Inter,Arial,sans-serif;color:#0f172a;line-height:1.6">
+      <p>Dear ${escapeHtml(name)},</p>
+      <p>Thank you for contacting MAMAKQUANT.</p>
+      <p>We have received your enquiry and our team will review your message shortly. If your request is related to partnerships, institutional discussions, data infrastructure, or quant research, we will get back to you as soon as possible.</p>
+      <p>Best regards,<br />MAMAKQUANT Team</p>
+    </div>
+  `;
+}
+
+function buildAutoReplyText(name: string) {
+  return [
+    `Dear ${name},`,
+    "",
+    "Thank you for contacting MAMAKQUANT.",
+    "",
+    "We have received your enquiry and our team will review your message shortly. If your request is related to partnerships, institutional discussions, data infrastructure, or quant research, we will get back to you as soon as possible.",
+    "",
+    "Best regards,",
+    "MAMAKQUANT Team",
+  ].join("\n");
+}
+
+function getRateLimitStore() {
+  globalRateLimit.mamakquantContactRateLimit ??= new Map<string, RateLimitEntry>();
+  return globalRateLimit.mamakquantContactRateLimit;
+}
+
+function getClientIp(request: Request) {
+  const forwardedFor = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
+  const realIp = request.headers.get("x-real-ip")?.trim();
+
+  return forwardedFor || realIp || "unknown";
+}
+
+function isRateLimited(request: Request) {
+  const now = Date.now();
+  const store = getRateLimitStore();
+  const clientIp = getClientIp(request);
+  const entry = store.get(clientIp);
+
+  for (const [key, value] of store) {
+    if (value.resetAt <= now) {
+      store.delete(key);
+    }
+  }
+
+  if (!entry || entry.resetAt <= now) {
+    store.set(clientIp, { count: 1, resetAt: now + rateLimitWindowMs });
+    return false;
+  }
+
+  if (entry.count >= rateLimitMaxRequests) {
+    return true;
+  }
+
+  entry.count += 1;
+  return false;
+}
+
 export async function POST(request: Request) {
   let payload: ContactPayload;
 
@@ -121,6 +192,13 @@ export async function POST(request: Request) {
 
   if (honeypot) {
     return NextResponse.json({ ok: true });
+  }
+
+  if (isRateLimited(request)) {
+    return NextResponse.json(
+      { ok: false, error: "Too many contact attempts. Please try again later." },
+      { status: 429 },
+    );
   }
 
   const fieldErrors: FieldErrors = {};
@@ -161,7 +239,7 @@ export async function POST(request: Request) {
   const safeSubject = (values.subject || "Website enquiry").replace(/[\r\n]+/g, " ").slice(0, 140);
   const resend = new Resend(apiKey);
 
-  const { error } = await resend.emails.send({
+  const internalEmail = await resend.emails.send({
     from: fromEmail,
     to: toEmail,
     replyTo: values.email,
@@ -170,10 +248,27 @@ export async function POST(request: Request) {
     html: buildEmailHtml(emailValues, submittedAt),
   });
 
-  if (error) {
-    console.error("MAMAKQUANT contact form email failed.", error);
+  if (internalEmail.error) {
+    console.error("MAMAKQUANT contact form internal email failed.", internalEmail.error);
     return NextResponse.json(
       { ok: false, error: "Message could not be sent. Please try again shortly." },
+      { status: 502 },
+    );
+  }
+
+  const autoReplyEmail = await resend.emails.send({
+    from: fromEmail,
+    to: values.email,
+    replyTo: toEmail,
+    subject: "Thank you for contacting MAMAKQUANT",
+    text: buildAutoReplyText(values.name),
+    html: buildAutoReplyHtml(values.name),
+  });
+
+  if (autoReplyEmail.error) {
+    console.error("MAMAKQUANT contact form auto-reply email failed.", autoReplyEmail.error);
+    return NextResponse.json(
+      { ok: false, error: "Message was received, but the confirmation email could not be sent." },
       { status: 502 },
     );
   }

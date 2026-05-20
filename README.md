@@ -20,7 +20,7 @@ npm run build
 
 ## Contact Email
 
-The contact form posts to the Next.js App Router route at `src/app/api/contact/route.ts` and sends enquiries with Resend.
+The contact form posts to the Next.js App Router route at `src/app/api/contact/route.ts`. It sends the internal enquiry notification and a visitor confirmation email with Resend.
 
 Required local and Vercel environment variables:
 
