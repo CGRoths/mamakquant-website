@@ -2,42 +2,39 @@
 
 import { type FormEvent, useState } from "react";
 
-const interestTypes = [
-  "Partnership",
-  "Exchange / Brokerage",
-  "Investor Discussion",
-  "Data Infrastructure",
-  "Strategy / Research",
-  "General Inquiry",
-];
-
 type FormValues = {
   name: string;
   email: string;
   company: string;
-  role: string;
-  interestType: string;
+  subject: string;
   message: string;
+  website: string;
 };
 
 const initialValues: FormValues = {
   name: "",
   email: "",
   company: "",
-  role: "",
-  interestType: "",
+  subject: "",
   message: "",
+  website: "",
 };
+
+type FormStatus = "idle" | "submitting" | "success" | "error";
 
 export default function ContactForm() {
   const [values, setValues] = useState<FormValues>(initialValues);
   const [errors, setErrors] = useState<Partial<Record<keyof FormValues, string>>>({});
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<FormStatus>("idle");
+  const [statusMessage, setStatusMessage] = useState("");
 
   function updateField(field: keyof FormValues, value: string) {
     setValues((current) => ({ ...current, [field]: value }));
     setErrors((current) => ({ ...current, [field]: undefined }));
-    setSubmitted(false);
+    if (status !== "submitting") {
+      setStatus("idle");
+      setStatusMessage("");
+    }
   }
 
   function validate() {
@@ -49,39 +46,82 @@ export default function ContactForm() {
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) {
       nextErrors.email = "Enter a valid email address.";
     }
-    if (!values.company.trim()) nextErrors.company = "Company or organization is required.";
-    if (!values.role.trim()) nextErrors.role = "Role is required.";
-    if (!values.interestType) nextErrors.interestType = "Select an interest type.";
-    if (!values.message.trim()) nextErrors.message = "Message is required.";
+    if (!values.message.trim()) {
+      nextErrors.message = "Message is required.";
+    } else if (values.message.trim().length < 10) {
+      nextErrors.message = "Message must be at least 10 characters.";
+    }
 
     return nextErrors;
   }
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const nextErrors = validate();
     setErrors(nextErrors);
 
     if (Object.keys(nextErrors).length > 0) {
-      setSubmitted(false);
+      setStatus("error");
+      setStatusMessage("Please check the highlighted fields.");
       return;
     }
 
-    // Future integration: POST this payload to Formspree, Resend, EmailJS, or a Vercel serverless API route here.
-    setSubmitted(true);
-    setValues(initialValues);
+    setStatus("submitting");
+    setStatusMessage("");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+      const result = (await response.json().catch(() => null)) as
+        | { ok?: boolean; error?: string; fieldErrors?: Partial<Record<keyof FormValues, string>> }
+        | null;
+
+      if (!response.ok || !result?.ok) {
+        setErrors((current) => ({ ...current, ...result?.fieldErrors }));
+        setStatus("error");
+        setStatusMessage(result?.error || "Message could not be sent. Please try again shortly.");
+        return;
+      }
+
+      setStatus("success");
+      setStatusMessage("Message sent. We will review your enquiry and respond by email.");
+      setValues(initialValues);
+    } catch {
+      setStatus("error");
+      setStatusMessage("Network error. Please try again shortly.");
+    }
   }
+
+  const isSubmitting = status === "submitting";
 
   return (
     <form
       onSubmit={handleSubmit}
       noValidate
+      aria-busy={isSubmitting}
       className="rounded-lg border border-white/10 bg-white/[0.055] p-5 shadow-[0_24px_90px_rgba(8,47,73,0.28)] backdrop-blur-xl sm:p-6"
     >
+      <input
+        type="text"
+        name="website"
+        value={values.website}
+        onChange={(event) => updateField("website", event.target.value)}
+        autoComplete="off"
+        tabIndex={-1}
+        className="hidden"
+        aria-hidden="true"
+      />
+
       <div className="grid gap-5 md:grid-cols-2">
         <Field label="Name" error={errors.name}>
           <input
             required
+            name="name"
             value={values.name}
             onChange={(event) => updateField("name", event.target.value)}
             autoComplete="name"
@@ -94,6 +134,7 @@ export default function ContactForm() {
           <input
             required
             type="email"
+            name="email"
             value={values.email}
             onChange={(event) => updateField("email", event.target.value)}
             autoComplete="email"
@@ -104,7 +145,7 @@ export default function ContactForm() {
 
         <Field label="Company / Organization" error={errors.company}>
           <input
-            required
+            name="company"
             value={values.company}
             onChange={(event) => updateField("company", event.target.value)}
             autoComplete="organization"
@@ -113,36 +154,20 @@ export default function ContactForm() {
           />
         </Field>
 
-        <Field label="Role" error={errors.role}>
+        <Field label="Subject" error={errors.subject}>
           <input
-            required
-            value={values.role}
-            onChange={(event) => updateField("role", event.target.value)}
-            autoComplete="organization-title"
+            name="subject"
+            value={values.subject}
+            onChange={(event) => updateField("subject", event.target.value)}
             className="form-field"
-            placeholder="Founder, partner, investor..."
+            placeholder="Partnership, data infrastructure, research..."
           />
-        </Field>
-
-        <Field label="Interest Type" error={errors.interestType} className="md:col-span-2">
-          <select
-            required
-            value={values.interestType}
-            onChange={(event) => updateField("interestType", event.target.value)}
-            className="form-field"
-          >
-            <option value="">Select interest type</option>
-            {interestTypes.map((type) => (
-              <option key={type} value={type}>
-                {type}
-              </option>
-            ))}
-          </select>
         </Field>
 
         <Field label="Message" error={errors.message} className="md:col-span-2">
           <textarea
             required
+            name="message"
             value={values.message}
             onChange={(event) => updateField("message", event.target.value)}
             className="form-field min-h-36 resize-y"
@@ -151,18 +176,30 @@ export default function ContactForm() {
         </Field>
       </div>
 
-      {submitted ? (
-        <div className="mt-5 rounded-lg border border-emerald-300/30 bg-emerald-300/10 px-4 py-3 text-sm text-emerald-100">
-          Message captured locally. The form is ready for a future email or serverless integration.
-        </div>
-      ) : null}
+      <div aria-live="polite">
+        {statusMessage ? (
+          <div
+            className={`mt-5 rounded-lg border px-4 py-3 text-sm ${
+              status === "success"
+                ? "border-emerald-300/30 bg-emerald-300/10 text-emerald-100"
+                : "border-rose-300/30 bg-rose-300/10 text-rose-100"
+            }`}
+          >
+            {statusMessage}
+          </div>
+        ) : null}
+      </div>
 
       <button
         type="submit"
-        className="mt-6 inline-flex w-full items-center justify-center rounded-lg bg-cyan-300 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-200 md:w-auto"
+        disabled={isSubmitting}
+        className="mt-6 inline-flex w-full items-center justify-center rounded-lg bg-cyan-300 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-200 disabled:cursor-not-allowed disabled:bg-slate-500 disabled:text-slate-200 md:w-auto"
       >
-        Send Message
+        {isSubmitting ? "Sending..." : "Send Message"}
       </button>
+      <p className="mt-4 text-xs leading-5 text-slate-500">
+        Enquiries are routed securely through the MAMAKQUANT website backend.
+      </p>
     </form>
   );
 }
