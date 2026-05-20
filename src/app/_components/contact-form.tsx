@@ -20,6 +20,15 @@ const initialValues: FormValues = {
   website: "",
 };
 
+const subjectOptions = [
+  "Partnership",
+  "Exchange / Brokerage",
+  "Investor Discussion",
+  "Data Infrastructure",
+  "Strategy / Research",
+  "General Inquiry",
+];
+
 type FormStatus = "idle" | "submitting" | "success" | "error";
 
 export default function ContactForm() {
@@ -155,13 +164,19 @@ export default function ContactForm() {
         </Field>
 
         <Field label="Subject" error={errors.subject}>
-          <input
+          <select
             name="subject"
             value={values.subject}
             onChange={(event) => updateField("subject", event.target.value)}
             className="form-field"
-            placeholder="Partnership, data infrastructure, research..."
-          />
+          >
+            <option value="">Select enquiry type</option>
+            {subjectOptions.map((subject) => (
+              <option key={subject} value={subject}>
+                {subject}
+              </option>
+            ))}
+          </select>
         </Field>
 
         <Field label="Message" error={errors.message} className="md:col-span-2">
