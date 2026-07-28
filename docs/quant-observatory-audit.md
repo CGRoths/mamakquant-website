@@ -90,3 +90,14 @@ successfully parsed after that cleanup-only failure.
 - No fake live telemetry, financial performance or infrastructure statistics
 - No invented product screenshots
 - No production environment-variable changes
+
+## Review deployment
+
+- Branch: `design/quant-observatory-v1`
+- Vercel target: preview
+- Deployment status: Ready
+- Preview URL: `https://mamakquant-website-9fdfaq46i-cray-ngs-projects.vercel.app`
+- Access: protected by the project's existing Vercel Authentication setting
+- Live smoke test: homepage, Technology, MQNODE, MQENGINE, Contact, robots and
+  sitemap returned the expected rendered content through Vercel's authenticated
+  preview request path
