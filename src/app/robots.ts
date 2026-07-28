@@ -6,6 +6,7 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
+    host: "https://mamakquant.com",
     sitemap: "https://mamakquant.com/sitemap.xml",
   };
 }
