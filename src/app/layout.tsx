@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     url: SITE_URL,
     images: [
       {
-        url: "/og-image.png",
+        url: "/og.png",
         width: 1200,
         height: 630,
         alt: "MAMAKQUANT vertically integrated quant infrastructure",
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "MAMAKQUANT | Vertically Integrated Quant Infrastructure",
     description,
-    images: ["/og-image.png"],
+    images: ["/og.png"],
   },
   robots: {
     index: true,

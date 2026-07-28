@@ -138,7 +138,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="system-section system-section--node">
+      <section className="system-section system-section--node" id="mqnode">
         <div className="shell system-section__grid">
           <div>
             <p className="eyebrow">MQNODE · Data truth</p>
@@ -170,7 +170,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="validation-section">
+      <section className="validation-section" id="validation">
         <div className="shell">
           <SectionHeading
             eyebrow="Research validation evidence"
@@ -207,7 +207,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="system-section system-section--chain">
+      <section className="system-section system-section--chain" id="mqchain">
         <div className="shell system-section__grid">
           <div>
             <p className="eyebrow">MQCHAIN · Entity truth</p>
@@ -235,7 +235,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="engine-section">
+      <section className="engine-section" id="mqengine">
         <div className="shell">
           <SectionHeading
             eyebrow="MQENGINE · Research truth"
@@ -272,7 +272,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="execution-section">
+      <section className="execution-section" id="mqbot">
         <div className="shell">
           <SectionHeading
             eyebrow="MQBOT · Execution control"
@@ -296,7 +296,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="ai-section">
+      <section className="ai-section" id="mqai">
         <div className="shell ai-section__grid">
           <div className="ai-orbit" aria-hidden="true">
             <span>MQAI</span>
@@ -325,7 +325,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="dash-section">
+      <section className="dash-section" id="mqdash">
         <div className="shell dash-section__grid">
           <div>
             <p className="eyebrow">MQDASH · In development</p>
@@ -348,7 +348,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="map-section">
+      <section className="map-section" id="ecosystem">
         <div className="shell">
           <SectionHeading
             eyebrow="System architecture"

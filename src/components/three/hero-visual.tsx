@@ -26,10 +26,17 @@ export function HeroVisual() {
 
   useEffect(() => {
     const frame = window.requestAnimationFrame(() => {
-      const motion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const diagnostics = new URLSearchParams(window.location.search);
+      const motion =
+        diagnostics.get("motion") === "reduce" ||
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       const compact = window.matchMedia("(max-width: 760px)").matches;
       setReducedMotion(motion);
-      setMode(!compact && canUseWebGL() ? "webgl" : "fallback");
+      setMode(
+        diagnostics.get("webgl") !== "off" && !compact && canUseWebGL()
+          ? "webgl"
+          : "fallback",
+      );
     });
     return () => window.cancelAnimationFrame(frame);
   }, []);

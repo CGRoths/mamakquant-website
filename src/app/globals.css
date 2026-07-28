@@ -1321,7 +1321,7 @@ a {
 }
 
 .systems-map__path small {
-  color: var(--dim);
+  color: #8e9aa6;
   font-size: 0.62rem;
   line-height: 1.35;
   margin-top: 0.55rem;
@@ -1787,26 +1787,6 @@ a {
 .form-status--error {
   border-color: rgba(222, 111, 111, 0.38);
   color: #f0aaaa;
-}
-
-@keyframes system-reveal {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.hero__copy,
-.hero-visual {
-  animation: system-reveal 700ms ease both;
-}
-
-.hero-visual {
-  animation-delay: 90ms;
 }
 
 @media (max-width: 1240px) {

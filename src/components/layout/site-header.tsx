@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { navigation } from "@/content/site";
 
@@ -11,6 +11,14 @@ import { BrandMark } from "./brand-mark";
 export function SiteHeader() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    function closeOnEscape(event: KeyboardEvent) {
+      if (event.key === "Escape") setOpen(false);
+    }
+    document.addEventListener("keydown", closeOnEscape);
+    return () => document.removeEventListener("keydown", closeOnEscape);
+  }, []);
 
   return (
     <header className="site-header">
@@ -61,7 +69,11 @@ export function SiteHeader() {
             {item.label}
           </Link>
         ))}
-        <Link className="mobile-nav__dash" href="/platform/mqdash">
+        <Link
+          className="mobile-nav__dash"
+          href="/platform/mqdash"
+          onClick={() => setOpen(false)}
+        >
           MQDASH <span>Platform preview</span>
         </Link>
       </nav>
