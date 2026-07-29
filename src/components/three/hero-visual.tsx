@@ -1,11 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import Image from "next/image";
-import Link from "next/link";
 import { useEffect, useState } from "react";
-
-import { architectureFlow, modules } from "@/content/site";
 
 const InfrastructureCanvas = dynamic(() => import("./infrastructure-canvas"), {
   ssr: false,
@@ -43,42 +39,38 @@ export function HeroVisual() {
 
   return (
     <div className="hero-visual" data-renderer={mode}>
-      <div className="hero-visual__grid" aria-hidden="true" />
+      <div className="hero-visual__atmosphere" aria-hidden="true" />
       {mode === "webgl" ? (
         <InfrastructureCanvas reducedMotion={reducedMotion} />
       ) : (
-        <div className="core-fallback" aria-hidden="true">
-          <span className="core-fallback__ring core-fallback__ring--one" />
-          <span className="core-fallback__ring core-fallback__ring--two" />
-          <span className="core-fallback__ring core-fallback__ring--three" />
+        <div className="monolith-fallback" aria-hidden="true">
+          <span className="monolith-fallback__frame" />
+          <span className="monolith-arm monolith-arm--one" />
+          <span className="monolith-arm monolith-arm--two" />
+          <span className="monolith-arm monolith-arm--three" />
+          <span className="monolith-arm monolith-arm--four" />
+          <span className="monolith-fallback__core" />
+          <span className="monolith-fallback__input" />
+          <span className="monolith-fallback__output" />
+          <span className="monolith-fallback__feedback" />
         </div>
       )}
-      <div className="hero-core-logo">
-        <Image
-          src="/mamakquant-logo.png"
-          alt="MAMAKQUANT official mark"
-          width={692}
-          height={692}
-          priority
-        />
+      <div className="hero-visual__axis" aria-hidden="true">
+        <span>UNSTRUCTURED INPUT</span>
+        <i />
+        <span>GOVERNED OUTPUT</span>
       </div>
-      <p className="hero-visual__label">Quant infrastructure core</p>
-      <div className="hero-module-track" aria-label="Infrastructure module routes">
-        {modules.slice(0, 5).map((module, index) => (
-          <Link
-            key={module.code}
-            href={module.route}
-            className={`hero-module hero-module--${index + 1}`}
-          >
-            <span>{String(index + 1).padStart(2, "0")}</span>
-            {module.name}
-          </Link>
-        ))}
+      <div className="hero-visual__readout" aria-hidden="true">
+        <span>INPUT / RAW EVENTS</span>
+        <span>CORE / 05 SYSTEMS</span>
+        <span>OUTPUT / CONTROLLED INTELLIGENCE</span>
       </div>
-      <div className="hero-flow" aria-label="System flow">
-        {architectureFlow.map((stage) => (
-          <span key={stage}>{stage}</span>
-        ))}
+      <div className="hero-visual__signature">
+        <span>MQ</span>
+        <div>
+          <strong>Infrastructure Monolith</strong>
+          <small>Data ownership · research discipline · execution control</small>
+        </div>
       </div>
     </div>
   );

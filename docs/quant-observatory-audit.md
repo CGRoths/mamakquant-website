@@ -101,3 +101,69 @@ successfully parsed after that cleanup-only failure.
 - Live smoke test: homepage, Technology, MQNODE, MQENGINE, Contact, robots and
   sitemap returned the expected rendered content through Vercel's authenticated
   preview request path
+
+## Studio-quality benchmark iteration
+
+The current Wintermute corporate homepage was reviewed as a production-quality
+benchmark only. No Wintermute assets, wording, layouts, typography, colour
+identity, geometry, code or motion sequences were copied into the MAMAKQUANT
+implementation.
+
+The comparison identified four material gaps in the first observatory version:
+
+1. The hero used recognisable stock 3D primitives and a bordered visual panel.
+2. Section pacing was consistently dense and read too much like an engineering
+   presentation.
+3. Motion effects were local to individual components rather than coordinated
+   by a page-level progression.
+4. The mobile hero removed too much of the primary visual identity.
+
+The studio iteration addresses those gaps with:
+
+- a bespoke Infrastructure Monolith assembled from chamfered structural arms,
+  layered housings, internal yellow channels, data planes, directional input
+  and output paths, a feedback circuit and an outer MQAI governance frame;
+- a page-level narrative director that tracks the six-stage progression from
+  raw reality to a governed system without scroll hijacking;
+- alternating expressive, calm and evidence states;
+- full-bleed hero and evidence compositions rather than repeated framed cards;
+- a mobile composition that retains the monolith as a controlled background
+  layer while keeping text and calls to action immediately readable; and
+- reduced-motion and WebGL-disabled substitutions that preserve the same
+  information hierarchy and MAMAKQUANT silhouette.
+
+Internal review captures are stored outside the production site in the
+`mamakquant-studio-review` visual-validation folder. These include the live
+reference, the previous MAMAKQUANT hero, the final WebGL and fallback heroes,
+the mobile hero, resolution sequence, calm editorial state and evidence state.
+
+### Remaining benchmark gaps
+
+- The supplied MQNODE NVT and MQENGINE interface captures are still absent, so
+  the evidence states cannot yet deliver the visual authority of real product
+  output. Labelled placeholders remain intentionally explicit.
+- The monolith is procedurally assembled in-browser. A future production pass
+  could add an art-directed, optimised GLTF asset with authored materials and
+  baked detail while retaining the current semantic fallback.
+- Route changes remain immediate. Bespoke route transitions were not added
+  because they would not materially improve understanding and could delay
+  navigation.
+- Performance should be re-baselined after real evidence imagery is supplied,
+  because those assets will change image weight and largest-contentful-paint
+  behaviour.
+
+### Studio-iteration validation
+
+- Responsive review: 1920 × 1080, 1440 × 900, 1280 × 800, 1024 × 1366,
+  768 × 1024, 430 × 932, 390 × 844 and 360 × 800; no horizontal overflow
+- Production browser console: no warnings or errors in a fresh session
+- Mobile navigation: pointer-open and Escape-close states passed
+- Desktop Lighthouse: Performance 100, Accessibility 100,
+  Best Practices 100, SEO 100; LCP 0.6 s, CLS 0, TBT 0 ms
+- Mobile Lighthouse: Performance 97, Accessibility 100,
+  Best Practices 100, SEO 100; LCP 2.6 s, CLS 0, TBT 20 ms
+
+Both Lighthouse JSON reports were written successfully. As in the earlier
+validation run, the Windows launcher then returned an EPERM while deleting its
+temporary Chrome profile; this occurred after result generation and does not
+invalidate the parsed reports.

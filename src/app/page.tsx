@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import type { CSSProperties } from "react";
 
+import { NarrativeDirector } from "@/components/experience/narrative-director";
 import { EvidenceFrame } from "@/components/product/evidence-frame";
 import { SystemsMap } from "@/components/sections/systems-map";
 import { HeroVisual } from "@/components/three/hero-visual";
@@ -45,28 +47,28 @@ const principles = [
 
 export default function HomePage() {
   return (
-    <>
-      <section className="hero">
+    <NarrativeDirector>
+      <section className="hero" data-scene="0">
         <div className="hero__telemetry" aria-hidden="true">
-          <span>MAMAKQUANT SYSTEMS</span>
-          <span>POINT-IN-TIME MODE ACTIVE</span>
-          <span>ARCHITECTURE BOUNDARIES VERIFIED</span>
+          <span>MAMAKQUANT / SYSTEM 001</span>
+          <span>RAW SIGNAL IN</span>
+          <span>CONTROLLED INTELLIGENCE OUT</span>
         </div>
         <div className="shell hero__grid">
           <div className="hero__copy">
-            <p className="eyebrow">Quant infrastructure observatory</p>
+            <p className="eyebrow">Vertically integrated quant infrastructure</p>
             <h1>
               <span>MAMAKQUANT</span>
-              Vertically Integrated Quant Infrastructure
+              Raw complexity. Controlled intelligence.
             </h1>
             <p className="hero__statement">
-              From source data to validated intelligence and controlled execution.
+              One evidence chain from raw source data to validated research and
+              governed execution.
             </p>
             <p className="hero__body">
-              MAMAKQUANT develops an integrated infrastructure stack spanning
-              blockchain nodes, metric generation, entity intelligence,
-              quantitative research, strategy validation and risk-controlled
-              automated execution.
+              MAMAKQUANT owns the infrastructure between observation and action:
+              node-derived data, graph-native entity intelligence, research,
+              backtesting and risk-controlled automation.
             </p>
             <div className="button-row">
               <Link className="button button--primary" href="/technology">
@@ -77,50 +79,66 @@ export default function HomePage() {
               </Link>
             </div>
             <div className="hero__trust" aria-label="Operating principles">
-              <span>Data provenance.</span>
-              <span>Point-in-time correctness.</span>
-              <span>Research before deployment.</span>
+              <span>01 / Source provenance retained</span>
+              <span>02 / Point-in-time contracts enforced</span>
+              <span>03 / Research rejected before deployment</span>
             </div>
           </div>
           <HeroVisual />
         </div>
         <div className="hero__index shell">
-          <span>01 / RAW REALITY</span>
-          <span>06 / EXECUTABLE INTELLIGENCE</span>
+          <span>RAW MARKET COMPLEXITY</span>
+          <span>SCROLL TO RESOLVE ↓</span>
         </div>
       </section>
 
-      <section className="journey-section" id="infrastructure">
+      <section className="journey-section" id="infrastructure" data-scene="1">
         <div className="shell">
           <SectionHeading
-            eyebrow="Infrastructure journey"
-            title="One connected system. Explicit ownership at every layer."
-            body="Raw events become governed data, entity intelligence, research evidence and controlled execution. Outcomes return to improve the next research cycle."
+            eyebrow="Resolution sequence"
+            title="Raw reality enters fragmented. The stack resolves it."
+            body="The same visual logic becomes more ordered at each layer: heterogeneous events converge into governed data, entity context, research evidence and controlled execution."
           />
-          <ol className="journey">
-            {architectureFlow.map((stage, index) => (
-              <li key={stage}>
-                <span className="journey__index">{String(index + 1).padStart(2, "0")}</span>
-                <div>
-                  <h3>{stage}</h3>
-                  <p>
-                    {[
-                      "Heterogeneous blockchain, transaction and market events enter with source context intact.",
-                      "Raw inputs are normalised, reconciled and transformed into versioned point-in-time metrics.",
-                      "Addresses become evidence-backed entities, clusters and directional market flows.",
-                      "Metrics enter parameter testing, backtesting, benchmark comparison and robustness gates.",
-                      "Eligible strategies pass through position, risk, order-state and incident controls.",
-                      "Fills, slippage and errors return to MQENGINE and MQNODE as operating evidence.",
-                    ][index]}
-                  </p>
-                </div>
-              </li>
+        </div>
+        <div className="transformation-field">
+          <div className="transformation-field__chaos" aria-hidden="true">
+            {Array.from({ length: 48 }).map((_, index) => (
+              <i
+                key={index}
+                style={
+                  {
+                    "--particle": index,
+                    "--particle-x": `${(index * 37) % 48}%`,
+                    "--particle-y": `${(index * 61) % 92}%`,
+                  } as CSSProperties
+                }
+              />
             ))}
+          </div>
+          <ol className="journey shell">
+              {architectureFlow.map((stage, index) => (
+                <li key={stage}>
+                  <span className="journey__index">{String(index + 1).padStart(2, "0")}</span>
+                  <div>
+                    <h3>{stage}</h3>
+                    <p>
+                      {[
+                        "Heterogeneous blockchain, transaction and market events enter with source context intact.",
+                        "Raw inputs are normalised, reconciled and transformed into versioned point-in-time metrics.",
+                        "Addresses become evidence-backed entities, clusters and directional market flows.",
+                        "Metrics enter parameter testing, benchmark comparison and robustness gates.",
+                        "Eligible strategies pass through position, risk, order-state and incident controls.",
+                        "Fills, slippage and errors return as evidence for the next research cycle.",
+                      ][index]}
+                    </p>
+                  </div>
+                </li>
+              ))}
           </ol>
         </div>
       </section>
 
-      <section className="principles-section">
+      <section className="principles-section" data-scene="1">
         <div className="shell">
           <SectionHeading
             eyebrow="Operating position"
@@ -138,7 +156,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="system-section system-section--node" id="mqnode">
+      <section className="system-section system-section--node" id="mqnode" data-scene="1">
         <div className="shell system-section__grid">
           <div>
             <p className="eyebrow">MQNODE · Data truth</p>
@@ -170,7 +188,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="validation-section" id="validation">
+      <section className="validation-section" id="validation" data-scene="1">
         <div className="shell">
           <SectionHeading
             eyebrow="Research validation evidence"
@@ -207,7 +225,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="system-section system-section--chain" id="mqchain">
+      <section className="system-section system-section--chain" id="mqchain" data-scene="2">
         <div className="shell system-section__grid">
           <div>
             <p className="eyebrow">MQCHAIN · Entity truth</p>
@@ -235,7 +253,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="engine-section" id="mqengine">
+      <section className="engine-section" id="mqengine" data-scene="3">
         <div className="shell">
           <SectionHeading
             eyebrow="MQENGINE · Research truth"
@@ -272,7 +290,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="execution-section" id="mqbot">
+      <section className="execution-section" id="mqbot" data-scene="4">
         <div className="shell">
           <SectionHeading
             eyebrow="MQBOT · Execution control"
@@ -296,7 +314,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="ai-section" id="mqai">
+      <section className="ai-section" id="mqai" data-scene="5">
         <div className="shell ai-section__grid">
           <div className="ai-orbit" aria-hidden="true">
             <span>MQAI</span>
@@ -325,7 +343,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="dash-section" id="mqdash">
+      <section className="dash-section" id="mqdash" data-scene="5">
         <div className="shell dash-section__grid">
           <div>
             <p className="eyebrow">MQDASH · In development</p>
@@ -348,7 +366,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="map-section" id="ecosystem">
+      <section className="map-section" id="ecosystem" data-scene="5">
         <div className="shell">
           <SectionHeading
             eyebrow="System architecture"
@@ -359,7 +377,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="roadmap-section">
+      <section className="roadmap-section" data-scene="5">
         <div className="shell">
           <SectionHeading
             eyebrow="Company and roadmap"
@@ -393,7 +411,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="contact-cta">
+      <section className="contact-cta" data-scene="5">
         <div className="shell contact-cta__grid">
           <div>
             <p className="eyebrow">Institutional enquiries</p>
@@ -404,6 +422,6 @@ export default function HomePage() {
           </Link>
         </div>
       </section>
-    </>
+    </NarrativeDirector>
   );
 }
