@@ -8,11 +8,11 @@ export const socialLinks = [
 
 export const navigation = [
   { label: "Technology", href: "/technology" },
-  { label: "MQNODE", href: "/technology/mqnode" },
-  { label: "MQCHAIN", href: "/technology/mqchain" },
-  { label: "MQENGINE", href: "/technology/mqengine" },
-  { label: "MQBOT", href: "/technology/mqbot" },
-  { label: "MQAI", href: "/technology/mqai" },
+  { label: "MAMAKQUANTNODE", href: "/technology/mqnode" },
+  { label: "MAMAKQUANTCHAIN", href: "/technology/mqchain" },
+  { label: "MAMAKQUANTENGINE", href: "/technology/mqengine" },
+  { label: "MAMAKQUANTBOT", href: "/technology/mqbot" },
+  { label: "MAMAKQUANTAI", href: "/technology/mqai" },
   { label: "Company", href: "/company" },
   { label: "Contact", href: "/contact" },
 ] as const;
@@ -38,12 +38,14 @@ export type ModuleDefinition = {
   capabilities: string[];
   sequence: string[];
   accent: "cyan" | "blue" | "yellow" | "violet";
+  brandAsset?: string;
+  geometry: "node" | "chain" | "engine" | "bot" | "ai" | "dash";
 };
 
 export const modules: ModuleDefinition[] = [
   {
     code: "mqnode",
-    name: "MQNODE",
+    name: "MAMAKQUANTNODE",
     label: "Data truth",
     route: "/technology/mqnode",
     status: "Current system",
@@ -71,10 +73,12 @@ export const modules: ModuleDefinition[] = [
       "Serve governed data contracts",
     ],
     accent: "cyan",
+    brandAsset: "/brand/modules/mamakquantnode.png",
+    geometry: "node",
   },
   {
     code: "mqchain",
-    name: "MQCHAIN",
+    name: "MAMAKQUANTCHAIN",
     label: "Entity truth",
     route: "/technology/mqchain",
     status: "Current system",
@@ -83,7 +87,7 @@ export const modules: ModuleDefinition[] = [
     description:
       "Entity, wallet and on-chain flow intelligence with confidence-scored evidence.",
     summary:
-      "MQCHAIN resolves addresses and transaction paths into point-in-time entity intelligence, classifications and evidence-backed market flows.",
+      "MAMAKQUANTCHAIN resolves addresses and transaction paths into point-in-time entity intelligence, classifications and evidence-backed market flows.",
     capabilities: [
       "Wallet clustering",
       "Entity and label registry",
@@ -102,10 +106,12 @@ export const modules: ModuleDefinition[] = [
       "Publish governed intelligence contracts",
     ],
     accent: "blue",
+    brandAsset: "/brand/modules/mamakquantchain.png",
+    geometry: "chain",
   },
   {
     code: "mqengine",
-    name: "MQENGINE",
+    name: "MAMAKQUANTENGINE",
     label: "Research truth",
     route: "/technology/mqengine",
     status: "Current system",
@@ -114,7 +120,7 @@ export const modules: ModuleDefinition[] = [
     description:
       "Quantitative research, backtesting and robustness infrastructure.",
     summary:
-      "MQENGINE evaluates strategy families across parameter surfaces, trade-level outcomes, benchmark behaviour and robustness controls before deployment eligibility.",
+      "MAMAKQUANTENGINE evaluates strategy families across parameter surfaces, trade-level outcomes, benchmark behaviour and robustness controls before deployment eligibility.",
     capabilities: [
       "Factor research",
       "Parameter-universe testing",
@@ -133,10 +139,11 @@ export const modules: ModuleDefinition[] = [
       "Determine deployment eligibility",
     ],
     accent: "yellow",
+    geometry: "engine",
   },
   {
     code: "mqbot",
-    name: "MQBOT",
+    name: "MAMAKQUANTBOT",
     label: "Execution control",
     route: "/technology/mqbot",
     status: "Current system",
@@ -145,7 +152,7 @@ export const modules: ModuleDefinition[] = [
     description:
       "Automated execution and risk infrastructure with OMS feedback.",
     summary:
-      "MQBOT translates deployment-eligible strategies into monitored execution workflows with exchange connectivity, position controls, logging and feedback.",
+      "MAMAKQUANTBOT translates deployment-eligible strategies into monitored execution workflows with exchange connectivity, position controls, logging and feedback.",
     capabilities: [
       "Strategy execution modules",
       "Exchange connectors",
@@ -164,10 +171,12 @@ export const modules: ModuleDefinition[] = [
       "Return fills, slippage and errors to research",
     ],
     accent: "yellow",
+    brandAsset: "/brand/modules/mamakquantbot.png",
+    geometry: "bot",
   },
   {
     code: "mqai",
-    name: "MQAI",
+    name: "MAMAKQUANTAI",
     label: "Control plane",
     route: "/technology/mqai",
     status: "Current system",
@@ -176,7 +185,7 @@ export const modules: ModuleDefinition[] = [
     description:
       "AI-assisted operations and architecture control across specialised systems.",
     summary:
-      "MQAI coordinates repositories, engineering jobs, evaluations, documentation and architecture gates while retaining human approval checkpoints.",
+      "MAMAKQUANTAI coordinates repositories, engineering jobs, evaluations, documentation and architecture gates while retaining human approval checkpoints.",
     capabilities: [
       "Repository control",
       "Job orchestration",
@@ -195,10 +204,12 @@ export const modules: ModuleDefinition[] = [
       "Stop at human approval boundaries",
     ],
     accent: "violet",
+    brandAsset: "/brand/modules/mamakquantai.png",
+    geometry: "ai",
   },
   {
     code: "mqdash",
-    name: "MQDASH",
+    name: "MAMAKQUANTDASH",
     label: "Human interface",
     route: "/platform/mqdash",
     status: "In development",
@@ -207,7 +218,7 @@ export const modules: ModuleDefinition[] = [
     description:
       "A private data, research and system operating interface in development.",
     summary:
-      "MQDASH is designed to inspect MAMAKQUANT data, research and operating systems through future role-based interfaces.",
+      "MAMAKQUANTDASH is designed to inspect MAMAKQUANT data, research and operating systems through future role-based interfaces.",
     capabilities: [
       "Data dashboards",
       "Research diagnostics",
@@ -224,15 +235,16 @@ export const modules: ModuleDefinition[] = [
       "Escalate decisions through approval paths",
     ],
     accent: "blue",
+    geometry: "dash",
   },
 ];
 
 export const architectureFlow = [
   "Raw sources",
-  "MQNODE",
-  "MQCHAIN",
-  "MQENGINE",
-  "MQBOT",
+  "MAMAKQUANTNODE",
+  "MAMAKQUANTCHAIN",
+  "MAMAKQUANTENGINE",
+  "MAMAKQUANTBOT",
   "OMS / Execution",
 ] as const;
 

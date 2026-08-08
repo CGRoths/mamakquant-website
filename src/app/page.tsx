@@ -4,6 +4,7 @@ import type { CSSProperties } from "react";
 
 import { NarrativeDirector } from "@/components/experience/narrative-director";
 import { EvidenceFrame } from "@/components/product/evidence-frame";
+import { BrainIdentity, ModuleIdentity } from "@/components/product/module-identity";
 import { SystemsMap } from "@/components/sections/systems-map";
 import { HeroVisual } from "@/components/three/hero-visual";
 import { SectionHeading } from "@/components/ui/section-heading";
@@ -46,6 +47,8 @@ const principles = [
 ];
 
 export default function HomePage() {
+  const [node, chain, engine, bot, ai] = modules;
+
   return (
     <NarrativeDirector>
       <section className="hero" data-scene="0">
@@ -159,7 +162,8 @@ export default function HomePage() {
       <section className="system-section system-section--node" id="mqnode" data-scene="1">
         <div className="shell system-section__grid">
           <div>
-            <p className="eyebrow">MQNODE · Data truth</p>
+            <ModuleIdentity module={node} compact />
+            <p className="eyebrow">MAMAKQUANTNODE · Data truth</p>
             <h2>Metrics Built From Source</h2>
             <p className="system-section__lead">
               MAMAKQUANTNODE converts raw blockchain and market inputs into
@@ -172,14 +176,14 @@ export default function HomePage() {
               <span>Externally validated.</span>
             </p>
             <Link className="text-link" href="/technology/mqnode">
-              Inspect MQNODE
+              Inspect MAMAKQUANTNODE
             </Link>
           </div>
-          <div className="pipeline-visual" aria-label="MQNODE transformation pipeline">
+          <div className="pipeline-visual" aria-label="MAMAKQUANTNODE transformation pipeline">
             {["INGEST", "NORMALISE", "METRIC", "RECONCILE", "SERVE"].map(
               (stage, index) => (
                 <div key={stage}>
-                  <span>MQNODE.{stage}</span>
+                  <span>MAMAKQUANTNODE.{stage}</span>
                   <small>{index < 4 ? "transformation verified" : "contract ready"}</small>
                 </div>
               ),
@@ -228,7 +232,8 @@ export default function HomePage() {
       <section className="system-section system-section--chain" id="mqchain" data-scene="2">
         <div className="shell system-section__grid">
           <div>
-            <p className="eyebrow">MQCHAIN · Entity truth</p>
+            <ModuleIdentity module={chain} compact />
+            <p className="eyebrow">MAMAKQUANTCHAIN · Entity truth</p>
             <h2>Transactions Show Movement. Entities Reveal Meaning.</h2>
             <p className="system-section__lead">
               A graph-native intelligence layer for evidence-backed entities,
@@ -236,10 +241,10 @@ export default function HomePage() {
             </p>
             <p className="simulation-label">Visual demonstration — not live chain data</p>
             <Link className="text-link" href="/technology/mqchain">
-              Inspect MQCHAIN
+              Inspect MAMAKQUANTCHAIN
             </Link>
           </div>
-          <div className="entity-graph" role="img" aria-label="Synthetic MQCHAIN entity graph demonstration">
+          <div className="entity-graph" role="img" aria-label="Synthetic MAMAKQUANTCHAIN entity graph demonstration">
             <span className="entity-node entity-node--exchange">EXCHANGE</span>
             <span className="entity-node entity-node--bridge">BRIDGE</span>
             <span className="entity-node entity-node--protocol">PROTOCOL</span>
@@ -255,8 +260,9 @@ export default function HomePage() {
 
       <section className="engine-section" id="mqengine" data-scene="3">
         <div className="shell">
+          <ModuleIdentity module={engine} compact />
           <SectionHeading
-            eyebrow="MQENGINE · Research truth"
+            eyebrow="MAMAKQUANTENGINE · Research truth"
             title="Research Is a Rejection Engine"
             body="A profitable backtest is an observation. A validated strategy is an engineering output."
           />
@@ -264,13 +270,13 @@ export default function HomePage() {
             <EvidenceFrame
               label="ACTUAL MAMAKQUANT RESEARCH INTERFACE"
               title="Parameter-universe inspection"
-              description="Reserved for the supplied MQENGINE parameter-universe product screenshot."
+              description="Reserved for the supplied MAMAKQUANTENGINE parameter-universe product screenshot."
               variant="heatmap"
             />
             <EvidenceFrame
               label="ACTUAL MAMAKQUANT RESEARCH INTERFACE"
               title="Selected-strategy inspection"
-              description="Reserved for the supplied MQENGINE strategy-inspection product screenshot."
+              description="Reserved for the supplied MAMAKQUANTENGINE strategy-inspection product screenshot."
               variant="interface"
             />
           </div>
@@ -285,17 +291,18 @@ export default function HomePage() {
             )}
           </div>
           <Link className="text-link" href="/technology/mqengine">
-            Inspect MQENGINE
+            Inspect MAMAKQUANTENGINE
           </Link>
         </div>
       </section>
 
       <section className="execution-section" id="mqbot" data-scene="4">
         <div className="shell">
+          <ModuleIdentity module={bot} compact />
           <SectionHeading
-            eyebrow="MQBOT · Execution control"
+            eyebrow="MAMAKQUANTBOT · Execution control"
             title="Validated Research. Controlled Execution."
-            body="MQBOT translates deployment-eligible strategies into monitored execution workflows with exchange connectivity, position controls, logging and OMS feedback."
+            body="MAMAKQUANTBOT translates deployment-eligible strategies into monitored execution workflows with exchange connectivity, position controls, logging and OMS feedback."
           />
           <div className="execution-track">
             {["Strategy packet", "Pre-trade checks", "Risk gate", "Order route", "OMS feedback"].map(
@@ -309,35 +316,31 @@ export default function HomePage() {
             )}
           </div>
           <Link className="text-link" href="/technology/mqbot">
-            Inspect MQBOT
+            Inspect MAMAKQUANTBOT
           </Link>
         </div>
       </section>
 
       <section className="ai-section" id="mqai" data-scene="5">
         <div className="shell ai-section__grid">
-          <div className="ai-orbit" aria-hidden="true">
-            <span>MQAI</span>
-            <i />
-            <i />
-            <i />
-          </div>
+          <ModuleIdentity module={ai} />
           <div>
-            <p className="eyebrow">MQAI · Control plane</p>
+            <p className="eyebrow">MAMAKQUANTAI · Control plane</p>
             <h2>The Control Plane for the MAMAKQUANT Ecosystem</h2>
             <p className="system-section__lead">
-              MQAI coordinates repositories, engineering jobs, evaluations,
+              MAMAKQUANTAI coordinates repositories, engineering jobs, evaluations,
               documentation and architecture gates across specialised systems.
             </p>
             <div className="boundary-note">
-              <strong>MQAI is not MAMAKQUANTBRAIN.</strong>
+              <strong>MAMAKQUANTAI is not MAMAKQUANTBRAIN.</strong>
               <p>
                 MAMAKQUANTBRAIN is a future roadmap layer intended for alpha
                 discovery, strategy ranking and capital allocation.
               </p>
+              <BrainIdentity compact />
             </div>
             <Link className="text-link" href="/technology/mqai">
-              Inspect MQAI
+              Inspect MAMAKQUANTAI
             </Link>
           </div>
         </div>
@@ -346,10 +349,10 @@ export default function HomePage() {
       <section className="dash-section" id="mqdash" data-scene="5">
         <div className="shell dash-section__grid">
           <div>
-            <p className="eyebrow">MQDASH · In development</p>
+            <p className="eyebrow">MAMAKQUANTDASH · In development</p>
             <h2>The Human Operating Surface</h2>
             <p>
-              The corporate website explains the infrastructure. MQDASH is
+              The corporate website explains the infrastructure. MAMAKQUANTDASH is
               designed to operate and inspect it through future role-based data,
               research and system interfaces.
             </p>
@@ -357,7 +360,7 @@ export default function HomePage() {
               Platform preview
             </Link>
           </div>
-          <div className="dash-plane" aria-label="MQDASH conceptual interface plane">
+          <div className="dash-plane" aria-label="MAMAKQUANTDASH conceptual interface plane">
             <span>PRIVATE ACCESS</span>
             <div />
             <div />
@@ -392,7 +395,7 @@ export default function HomePage() {
             </div>
             <div>
               <span>In development</span>
-              {["MQDASH institutional interface", "MAMAKQUANT API", "Expanded entity intelligence", "Strategy registry"].map(
+              {["MAMAKQUANTDASH institutional interface", "MAMAKQUANT API", "Expanded entity intelligence", "Strategy registry"].map(
                 (item) => <p key={item}>{item}</p>,
               )}
             </div>

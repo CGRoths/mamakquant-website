@@ -6,7 +6,7 @@ import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 const system = getModule("mqengine");
 
 export const metadata = pageMetadata({
-  title: "MQENGINE | Quantitative Research and Backtesting Infrastructure",
+  title: "MAMAKQUANTENGINE | Quantitative Research and Backtesting Infrastructure",
   description: system.description,
   path: system.route,
 });
@@ -14,7 +14,7 @@ export const metadata = pageMetadata({
 export default function MQEnginePage() {
   return (
     <>
-      <StructuredData value={breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Technology", path: "/technology" }, { name: "MQENGINE", path: system.route }])} />
+      <StructuredData value={breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Technology", path: "/technology" }, { name: system.name, path: system.route }])} />
       <ModulePage module={system} />
     </>
   );

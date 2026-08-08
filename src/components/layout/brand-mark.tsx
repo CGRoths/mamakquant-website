@@ -6,10 +6,10 @@ export function BrandMark({ compact = false }: { compact?: boolean }) {
     <Link className="brand-mark" href="/" aria-label="MAMAKQUANT home">
       <span className="brand-mark__symbol">
         <Image
-          src="/mamakquant-logo.png"
+          src="/brand/mamakquant-mark.png"
           alt=""
           fill
-          priority
+          preload
           sizes={compact ? "36px" : "42px"}
         />
       </span>

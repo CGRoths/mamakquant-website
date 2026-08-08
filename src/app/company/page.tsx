@@ -73,7 +73,7 @@ export default function CompanyPage() {
             </div>
             <div>
               <span>In development</span>
-              <p>MQDASH institutional interface</p>
+              <p>MAMAKQUANTDASH institutional interface</p>
               <p>MAMAKQUANT API</p>
               <p>Multi-chain intelligence</p>
               <p>Expanded entity intelligence</p>

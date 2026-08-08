@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { ModuleDefinition } from "@/content/site";
 import { modules } from "@/content/site";
 
+import { BrainIdentity, ModuleIdentity } from "../product/module-identity";
 import { Breadcrumb } from "../ui/breadcrumb";
 
 export function ModulePage({ module }: { module: ModuleDefinition }) {
@@ -36,11 +37,7 @@ export function ModulePage({ module }: { module: ModuleDefinition }) {
                 </Link>
               </div>
             </div>
-            <div className="module-orbit" aria-hidden="true">
-              <span className="module-orbit__code">{module.name}</span>
-              <span className="module-orbit__ring module-orbit__ring--one" />
-              <span className="module-orbit__ring module-orbit__ring--two" />
-            </div>
+            <ModuleIdentity module={module} />
           </div>
         </div>
       </section>
@@ -93,12 +90,15 @@ export function ModulePage({ module }: { module: ModuleDefinition }) {
         <section className="boundary-callout">
           <div className="shell">
             <p className="eyebrow">Architecture boundary</p>
-            <h2>MQAI is not MAMAKQUANTBRAIN.</h2>
+            <div>
+              <h2>MAMAKQUANTAI is not MAMAKQUANTBRAIN.</h2>
             <p>
-              MQAI is the AI operator and infrastructure control plane.
+              MAMAKQUANTAI is the AI operator and infrastructure control plane.
               MAMAKQUANTBRAIN is a future roadmap layer intended for alpha
               discovery, strategy ranking and capital-allocation intelligence.
             </p>
+            </div>
+            <BrainIdentity compact />
           </div>
         </section>
       ) : null}

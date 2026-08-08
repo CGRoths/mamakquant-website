@@ -74,7 +74,7 @@ export function SiteHeader() {
           href="/platform/mqdash"
           onClick={() => setOpen(false)}
         >
-          MQDASH <span>Platform preview</span>
+          MAMAKQUANTDASH <span>Platform preview</span>
         </Link>
       </nav>
     </header>

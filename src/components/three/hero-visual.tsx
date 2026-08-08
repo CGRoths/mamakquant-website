@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 const InfrastructureCanvas = dynamic(() => import("./infrastructure-canvas"), {
@@ -66,7 +67,15 @@ export function HeroVisual() {
         <span>OUTPUT / CONTROLLED INTELLIGENCE</span>
       </div>
       <div className="hero-visual__signature">
-        <span>MQ</span>
+        <span className="hero-visual__official-mark">
+          <Image
+            src="/brand/mamakquant-mark.png"
+            alt="MAMAKQUANT official mark"
+            fill
+            loading="eager"
+            sizes="54px"
+          />
+        </span>
         <div>
           <strong>Infrastructure Monolith</strong>
           <small>Data ownership · research discipline · execution control</small>

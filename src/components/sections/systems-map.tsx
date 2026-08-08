@@ -12,7 +12,7 @@ export function SystemsMap() {
   return (
     <div className="systems-map">
       <div className="systems-map__control">
-        <span>MQAI CONTROL PLANE</span>
+        <span>MAMAKQUANTAI CONTROL PLANE</span>
         <small>Human approval checkpoints retained</small>
       </div>
       <div className="systems-map__body">
@@ -53,12 +53,12 @@ export function SystemsMap() {
         </aside>
       </div>
       <div className="systems-map__dash">
-        <span>MQDASH</span>
+        <span>MAMAKQUANTDASH</span>
         <small>Human operating surface · In development</small>
       </div>
       <div className="systems-map__brain">
         <span>MAMAKQUANTBRAIN</span>
-        <small>Future roadmap · distinct from MQAI</small>
+        <small>Future roadmap · distinct from MAMAKQUANTAI</small>
       </div>
     </div>
   );

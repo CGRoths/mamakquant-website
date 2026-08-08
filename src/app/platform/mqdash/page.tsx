@@ -6,7 +6,7 @@ import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 const system = getModule("mqdash");
 
 export const metadata = pageMetadata({
-  title: "MQDASH | Quant Data and Research Operating Interface",
+  title: "MAMAKQUANTDASH | Quant Data and Research Operating Interface",
   description: system.description,
   path: system.route,
 });
@@ -14,7 +14,7 @@ export const metadata = pageMetadata({
 export default function MQDashPage() {
   return (
     <>
-      <StructuredData value={breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Platform", path: "/platform/mqdash" }, { name: "MQDASH", path: system.route }])} />
+      <StructuredData value={breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Platform", path: "/platform/mqdash" }, { name: system.name, path: system.route }])} />
       <ModulePage module={system} />
     </>
   );
