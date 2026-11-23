@@ -21,12 +21,12 @@ const initialValues: FormValues = {
 };
 
 const subjectOptions = [
-  "Partnership",
-  "Exchange / Brokerage",
-  "Investor Discussion",
-  "Data Infrastructure",
-  "Strategy / Research",
-  "General Inquiry",
+  "Infrastructure",
+  "Research collaboration",
+  "Institutional enquiries",
+  "Data and API",
+  "Technology partnership",
+  "General enquiry",
 ];
 
 type FormStatus = "idle" | "submitting" | "success" | "error";
@@ -113,7 +113,7 @@ export default function ContactForm() {
       onSubmit={handleSubmit}
       noValidate
       aria-busy={isSubmitting}
-      className="rounded-lg border border-white/10 bg-white/[0.055] p-5 shadow-[0_24px_90px_rgba(8,47,73,0.28)] backdrop-blur-xl sm:p-6"
+      className="form-shell"
     >
       <input
         type="text"
@@ -126,7 +126,7 @@ export default function ContactForm() {
         aria-hidden="true"
       />
 
-      <div className="grid gap-5 md:grid-cols-2">
+      <div className="form-grid">
         <Field label="Name" error={errors.name}>
           <input
             required
@@ -179,7 +179,7 @@ export default function ContactForm() {
           </select>
         </Field>
 
-        <Field label="Message" error={errors.message} className="md:col-span-2">
+        <Field label="Message" error={errors.message} className="form-span">
           <textarea
             required
             name="message"
@@ -191,13 +191,13 @@ export default function ContactForm() {
         </Field>
       </div>
 
-      <div aria-live="polite">
+      <div aria-live="polite" aria-atomic="true">
         {statusMessage ? (
           <div
-            className={`mt-5 rounded-lg border px-4 py-3 text-sm ${
+            className={`form-status ${
               status === "success"
-                ? "border-emerald-300/30 bg-emerald-300/10 text-emerald-100"
-                : "border-rose-300/30 bg-rose-300/10 text-rose-100"
+                ? "form-status--success"
+                : "form-status--error"
             }`}
           >
             {statusMessage}
@@ -208,13 +208,11 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="mt-6 inline-flex w-full items-center justify-center rounded-lg bg-cyan-300 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-200 disabled:cursor-not-allowed disabled:bg-slate-500 disabled:text-slate-200 md:w-auto"
+        className="button button--primary"
       >
         {isSubmitting ? "Sending..." : "Send Message"}
       </button>
-      <p className="mt-4 text-xs leading-5 text-slate-500">
-        Enquiries are routed securely through the MAMAKQUANT website backend.
-      </p>
+
     </form>
   );
 }
@@ -232,9 +230,9 @@ function Field({
 }>) {
   return (
     <label className={`block ${className}`}>
-      <span className="mb-2 block text-sm font-medium text-slate-200">{label}</span>
+      <span className="field-label">{label}</span>
       {children}
-      {error ? <span className="mt-2 block text-xs text-rose-200">{error}</span> : null}
+      {error ? <span className="field-error">{error}</span> : null}
     </label>
   );
 }
