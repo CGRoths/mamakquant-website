@@ -2,64 +2,57 @@
 
 import Link from "next/link";
 import { useState } from "react";
-
 import { modules } from "@/content/site";
 
-export function SystemsMap() {
-  const [active, setActive] = useState("mqnode");
-  const selected = modules.find((module) => module.code === active) ?? modules[0];
+const stages = [
+  "Source data",
+  "Entity intelligence",
+  "Research validation",
+  "Execution",
+];
+const pipeline = modules.slice(0, 4);
 
+export function SystemsMap() {
+  const [index, setIndex] = useState(0);
+  const selected = pipeline[index];
   return (
-    <div className="systems-map">
-      <div className="systems-map__control">
-        <span>MAMAKQUANTAI CONTROL PLANE</span>
-        <small>Human approval checkpoints retained</small>
-      </div>
-      <div className="systems-map__body">
-        <div className="systems-map__path" aria-label="Interactive MAMAKQUANT system map">
-          <div className="systems-map__source">
-            <span>RAW SOURCES</span>
-            <small>Blocks · transactions · markets</small>
-          </div>
-          {modules.slice(0, 4).map((module) => (
+    <section className="shell flow-section" id="ecosystem">
+      <p className="eyebrow">Architecture flow</p>
+      <h2>Trace the data path.</h2>
+      <div className="flow-box">
+        <div
+          className="flow-stages"
+          role="group"
+          aria-label="Choose an architecture stage"
+        >
+          {stages.map((stage, i) => (
             <button
-              key={module.code}
               type="button"
-              className={active === module.code ? "is-active" : ""}
-              onMouseEnter={() => setActive(module.code)}
-              onFocus={() => setActive(module.code)}
-              onClick={() => setActive(module.code)}
-              aria-pressed={active === module.code}
+              key={stage}
+              aria-pressed={i === index}
+              onClick={() => setIndex(i)}
             >
-              <span>{module.name}</span>
-              <small>{module.label}</small>
+              <span>{String(i + 1).padStart(2, "0")}</span>
+              {stage}
             </button>
           ))}
-          <div className="systems-map__execution">
-            <span>OMS / EXECUTION</span>
-            <small>Feedback returns to research</small>
-          </div>
         </div>
-        <aside className="systems-map__summary" aria-live="polite">
-          <p className="telemetry">STATUS · INSPECTING</p>
-          <h3>{selected.name}</h3>
-          <p>{selected.ownership}</p>
+        <div className="flow-detail" aria-live="polite">
+          <div>
+            <p className="eyebrow">{selected.label}</p>
+            <h3>{selected.name}</h3>
+            <p>{selected.summary}</p>
+            <Link className="text-link" href={selected.route}>
+              Explore this system
+            </Link>
+          </div>
           <ul>
-            {selected.capabilities.slice(0, 4).map((capability) => (
-              <li key={capability}>{capability}</li>
+            {selected.capabilities.slice(0, 4).map((item) => (
+              <li key={item}>{item}</li>
             ))}
           </ul>
-          <Link href={selected.route}>Inspect {selected.name}</Link>
-        </aside>
+        </div>
       </div>
-      <div className="systems-map__dash">
-        <span>MAMAKQUANTDASH</span>
-        <small>Human operating surface · In development</small>
-      </div>
-      <div className="systems-map__brain">
-        <span>MAMAKQUANTBRAIN</span>
-        <small>Future roadmap · distinct from MAMAKQUANTAI</small>
-      </div>
-    </div>
+    </section>
   );
 }

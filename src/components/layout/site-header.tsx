@@ -2,81 +2,86 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
-
+import { useEffect, useRef, useState } from "react";
 import { navigation } from "@/content/site";
-
 import { BrandMark } from "./brand-mark";
 
 export function SiteHeader() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-
+  const toggle = useRef<HTMLButtonElement>(null);
   useEffect(() => {
-    function closeOnEscape(event: KeyboardEvent) {
-      if (event.key === "Escape") setOpen(false);
+    if (!open) return;
+    function dismiss(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setOpen(false);
+        toggle.current?.focus();
+      }
     }
-    document.addEventListener("keydown", closeOnEscape);
-    return () => document.removeEventListener("keydown", closeOnEscape);
-  }, []);
+    window.addEventListener("keydown", dismiss);
+    return () => window.removeEventListener("keydown", dismiss);
+  }, [open]);
 
-  return (
-    <header className="site-header">
-      <div className="site-header__inner">
-        <BrandMark compact />
-        <nav className="desktop-nav" aria-label="Primary navigation">
-          {navigation.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={pathname === item.href ? "is-active" : undefined}
-              onClick={() => setOpen(false)}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-        <div className="site-header__actions">
-          <Link className="text-link header-enquiry" href="/contact">
-            Institutional enquiries
-          </Link>
-          <Link className="button button--primary header-cta" href="/technology">
-            Explore infrastructure
-          </Link>
-          <button
-            className="menu-button"
-            type="button"
-            aria-expanded={open}
-            aria-controls="mobile-navigation"
-            onClick={() => setOpen((current) => !current)}
-          >
-            <span className="sr-only">{open ? "Close menu" : "Open menu"}</span>
-            <span aria-hidden="true">{open ? "×" : "Menu"}</span>
-          </button>
-        </div>
-      </div>
-      <nav
-        id="mobile-navigation"
-        className={`mobile-nav ${open ? "is-open" : ""}`}
-        aria-label="Mobile navigation"
-      >
-        {navigation.map((item) => (
+  function navLinks() {
+    return navigation
+      .filter((item) => item.href !== "/contact")
+      .map((item) => {
+        const selected =
+          pathname === item.href ||
+          (item.href === "/technology" && pathname.startsWith("/technology/"));
+        return (
           <Link
             key={item.href}
             href={item.href}
-            className={pathname === item.href ? "is-active" : undefined}
+            className={selected ? "is-active" : undefined}
+            aria-current={pathname === item.href ? "page" : undefined}
+            onClick={() => setOpen(false)}
           >
             {item.label}
           </Link>
-        ))}
-        <Link
-          className="mobile-nav__dash"
-          href="/platform/mqdash"
-          onClick={() => setOpen(false)}
-        >
-          MAMAKQUANTDASH <span>Platform preview</span>
-        </Link>
-      </nav>
+        );
+      });
+  }
+  return (
+    <header className="site-header">
+      <div className="shell">
+        <div className="nav-glass">
+          <div onClick={() => setOpen(false)}>
+            <BrandMark compact />
+          </div>
+          <nav className="desktop-nav" aria-label="Primary navigation">
+            {navLinks()}
+          </nav>
+          <div className="nav-actions">
+            <Link
+              className="contact-link"
+              href="/contact"
+              onClick={() => setOpen(false)}
+            >
+              Get in touch
+            </Link>
+            <button
+              type="button"
+              ref={toggle}
+              className="menu-button"
+              aria-expanded={open}
+              aria-controls="mobile-nav"
+              onClick={() => setOpen(!open)}
+            >
+              {open ? "Close" : "Menu"}
+            </button>
+          </div>
+        </div>
+        {open && (
+          <nav
+            className="mobile-nav"
+            id="mobile-nav"
+            aria-label="Mobile navigation"
+          >
+            {navLinks()}
+          </nav>
+        )}
+      </div>
     </header>
   );
 }

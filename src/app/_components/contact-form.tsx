@@ -212,9 +212,7 @@ export default function ContactForm() {
       >
         {isSubmitting ? "Sending..." : "Send Message"}
       </button>
-      <p style={{ color: "var(--dim)", fontSize: "0.72rem", lineHeight: 1.6, marginTop: "1rem" }}>
-        Enquiries are routed securely through the MAMAKQUANT website backend.
-      </p>
+
     </form>
   );
 }

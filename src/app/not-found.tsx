@@ -5,9 +5,9 @@ export default function NotFound() {
     <section className="page-hero page-hero--yellow">
       <div className="shell">
         <p className="eyebrow">404 · Route unavailable</p>
-        <h1>That system path does not exist.</h1>
+        <h1>Page not found.</h1>
         <p className="page-hero__lead">
-          Return to the observatory or inspect the complete MAMAKQUANT technology stack.
+          Return to the homepage or explore the MAMAKQUANT technology stack.
         </p>
         <div className="button-row">
           <Link className="button button--primary" href="/">

@@ -4,6 +4,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SITE_URL, socialLinks } from "@/content/site";
+import { brandPreview } from "@/lib/seo";
 
 import "./globals.css";
 
@@ -37,9 +38,9 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
-      { url: "/icon.png", type: "image/png", sizes: "692x692" },
+      { url: "/icon.png", type: "image/png", sizes: "512x512" },
     ],
-    apple: [{ url: "/apple-icon.png", type: "image/png", sizes: "692x692" }],
+    apple: [{ url: "/apple-icon.png", type: "image/png", sizes: "180x180" }],
   },
   openGraph: {
     type: "website",
@@ -48,20 +49,13 @@ export const metadata: Metadata = {
     title: "MAMAKQUANT | Vertically Integrated Quant Infrastructure",
     description,
     url: SITE_URL,
-    images: [
-      {
-        url: "/og.png",
-        width: 1200,
-        height: 630,
-        alt: "MAMAKQUANT vertically integrated quant infrastructure",
-      },
-    ],
+    images: [brandPreview],
   },
   twitter: {
     card: "summary_large_image",
     title: "MAMAKQUANT | Vertically Integrated Quant Infrastructure",
     description,
-    images: ["/og.png"],
+    images: [brandPreview],
   },
   robots: {
     index: true,
@@ -77,7 +71,7 @@ const structuredData = {
       "@id": `${SITE_URL}/#organization`,
       name: "MAMAKQUANT",
       url: SITE_URL,
-      logo: `${SITE_URL}/icon.png`,
+      logo: `${SITE_URL}/mamakquant-logo.png`,
       description,
       sameAs: socialLinks.map((link) => link.href),
       parentOrganization: {

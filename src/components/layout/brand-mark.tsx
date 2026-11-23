@@ -4,16 +4,14 @@ import Link from "next/link";
 export function BrandMark({ compact = false }: { compact?: boolean }) {
   return (
     <Link className="brand-mark" href="/" aria-label="MAMAKQUANT home">
-      <span className="brand-mark__symbol">
-        <Image
-          src="/brand/mamakquant-mark.png"
-          alt=""
-          fill
-          preload
-          sizes={compact ? "36px" : "42px"}
-        />
-      </span>
-      <span className="brand-mark__word">MAMAKQUANT</span>
+      <Image
+        src="/brand/mamakquant-signature.png"
+        alt=""
+        width={795}
+        height={152}
+        sizes={compact ? "(max-width: 740px) 144px, 172px" : "212px"}
+        loading={compact ? "eager" : "lazy"}
+      />
     </Link>
   );
 }

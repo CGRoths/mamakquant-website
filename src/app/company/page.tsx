@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 import { Breadcrumb } from "@/components/ui/breadcrumb";
@@ -26,22 +27,16 @@ export default function CompanyPage() {
           <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Company" }]} />
           <div className="page-hero__grid">
             <div>
-              <p className="eyebrow">Engineering position</p>
-              <h1>Build the evidence chain before the execution system.</h1>
+              <p className="eyebrow">Company</p>
+              <h1>Research starts with <em>the source.</em></h1>
               <p className="page-hero__lead">
-                MAMAKQUANT is organised around infrastructure ownership,
-                point-in-time correctness, repeatable validation and explicit
-                control boundaries—not speculative promises.
+                MAMAKQUANT builds the infrastructure behind quantitative research, from the first source record to the controls that govern execution.
               </p>
               <Link className="button button--primary" href="/contact">
                 Institutional enquiries
               </Link>
             </div>
-            <div className="module-orbit" aria-hidden="true">
-              <span className="module-orbit__code">PRINCIPLES / 07</span>
-              <span className="module-orbit__ring module-orbit__ring--one" />
-              <span className="module-orbit__ring module-orbit__ring--two" />
-            </div>
+            <div className="feature-art"><Image src="/glass/optical-loop.webp" alt="" fill sizes="(max-width: 740px) 90vw, 440px" /></div>
           </div>
         </div>
       </section>

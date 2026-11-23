@@ -7,12 +7,9 @@ export const socialLinks = [
 ] as const;
 
 export const navigation = [
+  { label: "Overview", href: "/" },
   { label: "Technology", href: "/technology" },
-  { label: "MAMAKQUANTNODE", href: "/technology/mqnode" },
-  { label: "MAMAKQUANTCHAIN", href: "/technology/mqchain" },
-  { label: "MAMAKQUANTENGINE", href: "/technology/mqengine" },
-  { label: "MAMAKQUANTBOT", href: "/technology/mqbot" },
-  { label: "MAMAKQUANTAI", href: "/technology/mqai" },
+  { label: "Platform", href: "/platform/mqdash" },
   { label: "Company", href: "/company" },
   { label: "Contact", href: "/contact" },
 ] as const;

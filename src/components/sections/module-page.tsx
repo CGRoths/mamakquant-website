@@ -30,7 +30,7 @@ export function ModulePage({ module }: { module: ModuleDefinition }) {
               <p className="page-hero__lead">{module.summary}</p>
               <div className="button-row">
                 <Link className="button button--primary" href="/contact">
-                  Discuss {module.name}
+                  Discuss this system
                 </Link>
                 <Link className="button button--secondary" href="/technology">
                   View complete stack
@@ -56,7 +56,7 @@ export function ModulePage({ module }: { module: ModuleDefinition }) {
         <div className="shell">
           <div className="section-heading">
             <p className="eyebrow">Operating sequence</p>
-            <h2>Controlled transformation, explicit boundaries</h2>
+            <h2>How the system works</h2>
           </div>
           <ol className="sequence-list">
             {module.sequence.map((step, index) => (
@@ -73,7 +73,7 @@ export function ModulePage({ module }: { module: ModuleDefinition }) {
         <div className="shell">
           <div className="section-heading">
             <p className="eyebrow">Capabilities</p>
-            <h2>What {module.name} is built to support</h2>
+            <h2>System capabilities</h2>
           </div>
           <div className="capability-grid">
             {module.capabilities.map((capability) => (
@@ -91,14 +91,14 @@ export function ModulePage({ module }: { module: ModuleDefinition }) {
           <div className="shell">
             <p className="eyebrow">Architecture boundary</p>
             <div>
-              <h2>MAMAKQUANTAI is not MAMAKQUANTBRAIN.</h2>
+              <h2>The role of MAMAKQUANTBRAIN</h2>
             <p>
               MAMAKQUANTAI is the AI operator and infrastructure control plane.
               MAMAKQUANTBRAIN is a future roadmap layer intended for alpha
               discovery, strategy ranking and capital-allocation intelligence.
             </p>
             </div>
-            <BrainIdentity compact />
+            <BrainIdentity />
           </div>
         </section>
       ) : null}

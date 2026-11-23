@@ -1,86 +1,60 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-const InfrastructureCanvas = dynamic(() => import("./infrastructure-canvas"), {
-  ssr: false,
-});
-
-function canUseWebGL() {
-  try {
-    const canvas = document.createElement("canvas");
-    return Boolean(canvas.getContext("webgl2") || canvas.getContext("webgl"));
-  } catch {
-    return false;
-  }
-}
+const studies = [
+  {
+    name: "Integrated stack",
+    image: "optical-loop",
+    alt: "Continuous loop of ridged optical glass",
+  },
+  {
+    name: "Data layers",
+    image: "mqnode",
+    alt: "Exploded stack of translucent data wafers",
+  },
+  {
+    name: "Entity links",
+    image: "mqchain",
+    alt: "Two interlocking crystal links",
+  },
+];
 
 export function HeroVisual() {
-  const [mode, setMode] = useState<"fallback" | "webgl">("fallback");
-  const [reducedMotion, setReducedMotion] = useState(true);
-
-  useEffect(() => {
-    const frame = window.requestAnimationFrame(() => {
-      const diagnostics = new URLSearchParams(window.location.search);
-      const motion =
-        diagnostics.get("motion") === "reduce" ||
-        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      const compact = window.matchMedia("(max-width: 760px)").matches;
-      setReducedMotion(motion);
-      setMode(
-        diagnostics.get("webgl") !== "off" && !compact && canUseWebGL()
-          ? "webgl"
-          : "fallback",
-      );
-    });
-    return () => window.cancelAnimationFrame(frame);
-  }, []);
-
+  const [index, setIndex] = useState(0);
+  const study = studies[index];
   return (
-    <div className="hero-visual" data-renderer={mode}>
-      <div className="hero-visual__atmosphere" aria-hidden="true" />
-      {mode === "webgl" ? (
-        <InfrastructureCanvas reducedMotion={reducedMotion} />
-      ) : (
-        <div className="monolith-fallback" aria-hidden="true">
-          <span className="monolith-fallback__frame" />
-          <span className="monolith-arm monolith-arm--one" />
-          <span className="monolith-arm monolith-arm--two" />
-          <span className="monolith-arm monolith-arm--three" />
-          <span className="monolith-arm monolith-arm--four" />
-          <span className="monolith-fallback__core" />
-          <span className="monolith-fallback__input" />
-          <span className="monolith-fallback__output" />
-          <span className="monolith-fallback__feedback" />
-        </div>
-      )}
-      <div className="hero-visual__axis" aria-hidden="true">
-        <span>UNSTRUCTURED INPUT</span>
-        <i />
-        <span>GOVERNED OUTPUT</span>
+    <figure className="optical-study" aria-label="Architecture studies">
+      <div className="study-stage">
+        <Image
+          key={study.image}
+          src={`/glass/${study.image}.webp`}
+          alt={study.alt}
+          fill
+          sizes="(max-width: 740px) 95vw, 54vw"
+          preload={index === 0}
+        />
+        <i className="register register-tl" aria-hidden="true" />
+        <i className="register register-br" aria-hidden="true" />
       </div>
-      <div className="hero-visual__readout" aria-hidden="true">
-        <span>INPUT / RAW EVENTS</span>
-        <span>CORE / 05 SYSTEMS</span>
-        <span>OUTPUT / CONTROLLED INTELLIGENCE</span>
-      </div>
-      <div className="hero-visual__signature">
-        <span className="hero-visual__official-mark">
-          <Image
-            src="/brand/mamakquant-mark.png"
-            alt="MAMAKQUANT official mark"
-            fill
-            loading="eager"
-            sizes="54px"
-          />
+      <figcaption className="study-caption">
+        <span className="study-index" aria-hidden="true">
+          {String(index + 1).padStart(2, "0")} / 03
         </span>
-        <div>
-          <strong>Infrastructure Monolith</strong>
-          <small>Data ownership · research discipline · execution control</small>
+        <span aria-live="polite">{study.name}</span>
+        <div className="study-switch">
+          {studies.map((item, i) => (
+            <button
+              key={item.name}
+              type="button"
+              aria-label={`Show ${item.name} study`}
+              aria-pressed={index === i}
+              onClick={() => setIndex(i)}
+            />
+          ))}
         </div>
-      </div>
-    </div>
+      </figcaption>
+    </figure>
   );
 }
